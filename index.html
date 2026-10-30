@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flag Royale</title>
+  <title>Flag Royale - Ultimate Suspense</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,57 +11,70 @@
       padding: 0;
       user-select: none;
     }
-    body {
-      background-color: #060913;
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #0a1128 0%, #030611 100%);
       color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow: hidden;
     }
 
-    /* ======================================================== */
-    /* 1. TOP HEADER (Others Tools)                             */
-    /* ======================================================== */
-    header {
+    .shorts-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: radial-gradient(circle at 50% 30%, #0d1733 0%, #040814 100%);
+      border-left: 1px solid rgba(56, 189, 248, 0.15);
+      border-right: 1px solid rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ১. OTHERS TOOLS HEADER */
+    .tools-header {
       height: 50px;
-      background: #0d1322;
+      background: rgba(13, 20, 36, 0.85);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      border-bottom: 2px solid #19243c;
+      padding: 0 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
       flex-shrink: 0;
       z-index: 10;
     }
-    .header-left, .header-right {
+    .tools-left, .tools-right {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: bold;
+      gap: 6px;
     }
-    .stat-badge {
-      background: #151d30;
-      padding: 5px 10px;
+    .badge {
+      background: rgba(20, 31, 56, 0.8);
+      padding: 4px 9px;
       border-radius: 6px;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      border: 1px solid #22304d;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px solid rgba(56, 189, 248, 0.25);
     }
-    .stat-val {
+    .badge-val {
       color: #38bdf8;
-      font-size: 14px;
-      margin-left: 4px;
-      font-weight: 800;
+      font-weight: 900;
+      margin-left: 3px;
     }
     .logo {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 900;
       letter-spacing: 1px;
       color: #facc15;
       text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+      text-shadow: 0 0 15px rgba(250, 204, 21, 0.6);
     }
     .live-dot {
       display: inline-block;
@@ -69,26 +82,11 @@
       height: 8px;
       background: #22c55e;
       border-radius: 50%;
-      box-shadow: 0 0 8px #22c55e;
+      box-shadow: 0 0 10px #22c55e;
     }
 
-    /* Main Container */
-    .layout-wrapper {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .game-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* 2. FLAGS ARENA */
-    .arena-container {
+    /* ২. FLAGS ARENA */
+    .flags-section {
       flex: 1;
       display: flex;
       justify-content: center;
@@ -98,32 +96,36 @@
     }
     canvas {
       display: block;
+      width: min(94vw, 45vh) !important;
+      height: min(94vw, 45vh) !important;
       aspect-ratio: 1 / 1;
     }
 
-    /* 3. ELIMINATED FLAGS */
-    .elim-container {
-      background: #090e1a;
-      border-top: 1px solid #1a253d;
+    /* ৩. ELIMINATED LIST */
+    .elim-section {
+      height: 52px;
+      background: rgba(10, 15, 29, 0.9);
+      border: 1px solid rgba(239, 68, 68, 0.3);
       display: flex;
       align-items: center;
-      padding: 0 14px;
-      gap: 10px;
+      padding: 0 10px;
+      gap: 8px;
       overflow-x: auto;
       flex-shrink: 0;
-      height: 48px;
+      margin: 0 10px;
+      border-radius: 10px;
+      box-shadow: inset 0 0 15px rgba(239, 68, 68, 0.1);
     }
-    .elim-container::-webkit-scrollbar {
-      display: none;
-    }
+    .elim-section::-webkit-scrollbar { display: none; }
     .elim-title {
       color: #ef4444;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       white-space: nowrap;
+      text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
     }
-    .eliminated-list {
+    .elim-list {
       display: flex;
       gap: 6px;
       align-items: center;
@@ -131,234 +133,135 @@
     .elim-badge {
       display: flex;
       align-items: center;
-      background: #141c2e;
-      border: 1px solid #243350;
-      border-radius: 4px;
+      background: #141a29;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
       padding: 2px 6px;
       gap: 5px;
       animation: popIn 0.3s ease-out;
     }
     .elim-rank {
-      font-size: 11px;
-      font-weight: bold;
+      font-size: 10px;
+      font-weight: 800;
       color: #94a3b8;
     }
     .elim-flag {
       width: 22px;
       height: 15px;
-      border-radius: 2px;
+      border-radius: 3px;
       object-fit: cover;
     }
 
-    /* ======================================================== */
-    /* 💻 DESKTOP VERSION (১ম স্টাইলে বড় সাইডবার চ্যাট)        */
-    /* ======================================================== */
-    @media (min-width: 769px) {
-      canvas {
-        width: min(92vw, 68vh) !important;
-        height: min(92vw, 68vh) !important;
-      }
-      .chat-container {
-        width: 320px;
-        background: #0a0f1d;
-        border-left: 2px solid #1a253d;
-        display: flex;
-        flex-direction: column;
-        flex-shrink: 0;
-        height: 100%;
-      }
-      .chat-header {
-        padding: 14px;
-        font-size: 13px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        border-bottom: 1px solid #1a253d;
-        color: #94a3b8;
-        display: flex;
-        justify-content: space-between;
-      }
-      .chat-messages {
-        flex: 1;
-        padding: 12px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        scroll-behavior: smooth;
-      }
-      .chat-messages::-webkit-scrollbar {
-        width: 5px;
-      }
-      .chat-messages::-webkit-scrollbar-thumb {
-        background: #1a253d;
-        border-radius: 4px;
-      }
-      .chat-msg {
-        background: #131a2c;
-        padding: 8px 12px;
-        border-radius: 6px;
-        font-size: 13px;
-        line-height: 1.4;
-        border-left: 3px solid #38bdf8;
-        word-break: break-word;
-        animation: fadeIn 0.2s ease-in;
-      }
+    /* ৪. LIVE CHAT (২ লাইন) */
+    .chat-section {
+      height: 72px;
+      min-height: 72px;
+      max-height: 72px;
+      background: rgba(9, 14, 27, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      margin: 6px 10px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 6px 10px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
-
-    /* ======================================================== */
-    /* 📱 MOBILE VERSION (নো গ্যাপ - পারফেক্ট কার্ড ফ্লো)      */
-    /* ======================================================== */
-    @media (max-width: 768px) {
-      .layout-wrapper {
-        flex-direction: column;
-        height: calc(100vh - 50px);
-        padding: 8px 12px;
-        gap: 10px;
-        justify-content: flex-start; /* ফাঁকা গ্যাপ বন্ধ করা হলো */
-        overflow-y: auto;
-      }
-      .game-area {
-        flex: 0 0 auto;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-      }
-
-      /* ১. FLAGS এরিনা - হেডারের ঠিক নিচেই থাকবে */
-      .arena-container {
-        flex: 0 0 auto;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-      }
-      canvas {
-        width: min(92vw, 48vh) !important;
-        height: min(92vw, 48vh) !important;
-      }
-
-      /* ২. ELIMINATED FLAG'S - এরিনার ঠিক গায়ে লাগানো */
-      .elim-container {
-        width: 100%;
-        height: 48px;
-        border: 1px solid #1c2740;
-        border-radius: 8px;
-        background: #0c1222;
-        padding: 0 10px;
-      }
-
-      /* ৩. LIVE CHAT - এলিমিনেটেডের ঠিক নিচে বসে যাবে */
-      .chat-container {
-        width: 100%;
-        height: 74px;
-        min-height: 74px;
-        max-height: 74px;
-        border: 1px solid #1c2740;
-        border-radius: 8px;
-        background: #0c1222;
-        display: flex;
-        flex-direction: column;
-        padding: 6px 10px;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-      .chat-header {
-        font-size: 11px;
-        font-weight: 800;
-        color: #94a3b8;
-        margin-bottom: 3px;
-        letter-spacing: 0.5px;
-      }
-      .chat-messages {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        gap: 4px;
-        overflow: hidden;
-      }
-      .chat-msg {
-        background: #141d33;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 11.5px;
-        line-height: 1.2;
-        border-left: 3px solid #38bdf8;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    .chat-header {
+      font-size: 10px;
+      font-weight: 800;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
     }
-
+    .chat-messages {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 4px;
+      overflow: hidden;
+    }
+    .chat-msg {
+      background: rgba(18, 26, 46, 0.8);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      line-height: 1.2;
+      border-left: 3px solid #38bdf8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .chat-msg.elim-msg {
       border-left-color: #ef4444;
-      background: #1c1318;
+      background: rgba(36, 17, 24, 0.8);
     }
     .chat-user {
       color: #38bdf8;
       font-weight: bold;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
     @keyframes popIn {
-      0% { transform: scale(0.4); opacity: 0; }
+      0% { transform: scale(0.3); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. TOP HEADER (Others Tools) -->
-  <header>
-    <div class="header-left">
-      <div class="stat-badge">ROUND <span class="stat-val" id="roundNum">1</span></div>
-    </div>
-    <div class="logo">👑 FLAG ROYALE</div>
-    <div class="header-right">
-      <div class="stat-badge">IN PLAY <span class="stat-val" id="inPlayCount">16</span></div>
-      <div class="stat-badge"><span class="live-dot"></span> <span style="color:#22c55e; font-size:11px; margin-left:3px;">LIVE</span></div>
-    </div>
-  </header>
-
-  <!-- Main Container -->
-  <div class="layout-wrapper">
-    <div class="game-area">
-      <!-- 2. FLAGS (Canvas Arena) -->
-      <div class="arena-container">
-        <canvas id="gameCanvas" width="700" height="700"></canvas>
+  <div class="shorts-container">
+    
+    <!-- ১. Tools Header -->
+    <div class="tools-header">
+      <div class="tools-left">
+        <div class="badge">ROUND <span class="badge-val" id="roundNum">1</span></div>
+        <div class="badge">ALIVE <span class="badge-val" id="inPlayCount">50</span></div>
       </div>
-
-      <!-- 3. ELIMINATED FLAG'S (ঠিক এরিনার নিচে) -->
-      <div class="elim-container">
-        <div class="elim-title">ELIMINATED:</div>
-        <div class="eliminated-list" id="eliminatedList"></div>
+      <div class="logo">FLAG ROYALE</div>
+      <div class="tools-right">
+        <div class="badge"><span class="live-dot"></span> <span style="color:#22c55e; margin-left:3px;">LIVE</span></div>
       </div>
     </div>
 
-    <!-- 4. LIVE CHAT (ঠিক এলিমিনেটেডের নিচে) -->
-    <div class="chat-container">
+    <!-- ২. Flags Arena -->
+    <div class="flags-section">
+      <canvas id="gameCanvas" width="700" height="700"></canvas>
+    </div>
+
+    <!-- ৩. Eliminated List -->
+    <div class="elim-section">
+      <div class="elim-title">OUT:</div>
+      <div class="elim-list" id="eliminatedList"></div>
+    </div>
+
+    <!-- ৪. Live Chat -->
+    <div class="chat-section">
       <div class="chat-header">
         <span>LIVE CHAT</span>
-        <span style="font-size: 10px; color: #22c55e;">● CONNECTED</span>
+        <span style="color: #22c55e;">● BATTLE IN PROGRESS</span>
       </div>
       <div class="chat-messages" id="chatBox"></div>
     </div>
+
   </div>
 
   <script>
+    if ('wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').catch(() => {});
+    }
+
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
+    // ৫০টি দেশ
     const countries = [
       { code: 'bd', name: 'Bangladesh' },
       { code: 'ar', name: 'Argentina' },
       { code: 'br', name: 'Brazil' },
+      { code: 'ps', name: 'Palestine' },
+      { code: 'pt', name: 'Portugal' },
       { code: 'de', name: 'Germany' },
       { code: 'fr', name: 'France' },
       { code: 'us', name: 'USA' },
@@ -366,12 +269,44 @@
       { code: 'in', name: 'India' },
       { code: 'pk', name: 'Pakistan' },
       { code: 'jp', name: 'Japan' },
-      { code: 'pt', name: 'Portugal' },
       { code: 'es', name: 'Spain' },
       { code: 'it', name: 'Italy' },
       { code: 'sa', name: 'Saudi Arabia' },
       { code: 'ca', name: 'Canada' },
-      { code: 'au', name: 'Australia' }
+      { code: 'au', name: 'Australia' },
+      { code: 'tr', name: 'Turkey' },
+      { code: 'ma', name: 'Morocco' },
+      { code: 'kr', name: 'South Korea' },
+      { code: 'nl', name: 'Netherlands' },
+      { code: 'hr', name: 'Croatia' },
+      { code: 'sn', name: 'Senegal' },
+      { code: 'mx', name: 'Mexico' },
+      { code: 'eg', name: 'Egypt' },
+      { code: 'ng', name: 'Nigeria' },
+      { code: 'gh', name: 'Ghana' },
+      { code: 'cm', name: 'Cameroon' },
+      { code: 'uy', name: 'Uruguay' },
+      { code: 'co', name: 'Colombia' },
+      { code: 'cl', name: 'Chile' },
+      { code: 'be', name: 'Belgium' },
+      { code: 'ch', name: 'Switzerland' },
+      { code: 'se', name: 'Sweden' },
+      { code: 'no', name: 'Norway' },
+      { code: 'dk', name: 'Denmark' },
+      { code: 'pl', name: 'Poland' },
+      { code: 'ru', name: 'Russia' },
+      { code: 'cn', name: 'China' },
+      { code: 'id', name: 'Indonesia' },
+      { code: 'my', name: 'Malaysia' },
+      { code: 'ir', name: 'Iran' },
+      { code: 'qa', name: 'Qatar' },
+      { code: 'ae', name: 'UAE' },
+      { code: 'za', name: 'South Africa' },
+      { code: 'dz', name: 'Algeria' },
+      { code: 'tn', name: 'Tunisia' },
+      { code: 'iq', name: 'Iraq' },
+      { code: 'nz', name: 'New Zealand' },
+      { code: 'np', name: 'Nepal' }
     ];
 
     const flagImages = {};
@@ -382,11 +317,14 @@
     });
 
     let round = 1;
-    const initialRadius = 328;
+    const initialRadius = 325;
     let arenaRadius = initialRadius;
-    const minRadius = 90;
+    const minRadius = 85;
     let gapAngle = 0;
-    const gapSize = 0.65;
+    
+    // 🔴 সাসপেন্স বাড়ানোর জন্য গ্যাপ সাইজ ছোট ও টাইট করা হয়েছে
+    const gapSize = 0.42; 
+    
     let flags = [];
     let eliminatedFlags = [];
     let isGameOver = false;
@@ -398,14 +336,9 @@
       div.innerHTML = `<span class="chat-user">${user}:</span> ${msg}`;
       chatBox.appendChild(div);
 
-      const isMobile = window.innerWidth <= 768;
-      const maxMsgs = isMobile ? 2 : 50;
-
-      while (chatBox.children.length > maxMsgs) {
+      while (chatBox.children.length > 2) {
         chatBox.removeChild(chatBox.children[0]);
       }
-
-      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     function initGame() {
@@ -416,53 +349,58 @@
       document.getElementById('roundNum').innerText = round;
       document.getElementById('eliminatedList').innerHTML = '';
 
+      // ৫০টি ফ্ল্যাগ স্পন - গতি নিয়ন্ত্রিত রাখা হয়েছে যাতে ধীরে খেলা জমে
       flags = countries.map(c => {
         const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * (arenaRadius - 110);
+        const dist = Math.random() * (arenaRadius - 80);
         return {
           code: c.code,
           name: c.name,
           x: canvas.width / 2 + Math.cos(angle) * dist,
           y: canvas.height / 2 + Math.sin(angle) * dist,
-          vx: (Math.random() - 0.5) * 5.5,
-          vy: (Math.random() - 0.5) * 5.5,
-          radius: 19,
+          vx: (Math.random() - 0.5) * 3.6,
+          vy: (Math.random() - 0.5) * 3.6,
+          radius: 14.5,
           eliminated: false,
           falling: false
         };
       });
 
       updateUI();
-      addChatMessage("System", `Round ${round} has started! 🚀`);
+      addChatMessage("System", `Round ${round} Battle Started! Who will survive? 🔥`);
     }
 
-    const fakeUsers = ["Alex_99", "Tanvir_BD", "Messi10", "CR7_Boss", "GameMaster", "NinjaX", "Rahim_77", "David_Pro"];
+    const fakeUsers = ["Alex_99", "Tanvir_BD", "Messi10", "CR7_Boss", "NinjaX", "Rahim", "Sabbir", "David"];
     setInterval(() => {
       if (!isGameOver) {
         const activeFlags = flags.filter(f => !f.eliminated);
         if (activeFlags.length > 1) {
           const u = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
           const randomCountry = activeFlags[Math.floor(Math.random() * activeFlags.length)];
-          addChatMessage(u, `Go ${randomCountry.name}! 🔥`);
+          addChatMessage(u, `Save ${randomCountry.name}! 🚀`);
         }
       }
     }, 2800);
 
+    // ফিজিক্স লজিক - সাসপেন্স ও ব্যালেন্সড মুভমেন্ট
     function updatePhysics() {
       if (isGameOver) return;
 
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
 
+      // 🔴 রিং সংকুচিত হওয়ার গতি অনেক কমিয়ে দেওয়া হয়েছে (আগে ছিল 0.08, এখন 0.038)
       if (arenaRadius > minRadius) {
-        arenaRadius -= 0.085;
+        arenaRadius -= 0.038;
       }
-      gapAngle += 0.016;
+      
+      // দেয়াল ঘূর্ণনের গতিও কিছুটা মসৃণ করা হয়েছে
+      gapAngle += 0.012;
       if (gapAngle > Math.PI * 2) gapAngle -= Math.PI * 2;
 
       flags.forEach(f => {
         if (f.falling) {
-          f.vy += 0.38;
+          f.vy += 0.35;
           f.x += f.vx;
           f.y += f.vy;
           return;
@@ -471,8 +409,9 @@
         f.x += f.vx;
         f.y += f.vy;
 
-        f.vx += (Math.random() - 0.5) * 0.12;
-        f.vy += (Math.random() - 0.5) * 0.12;
+        // সামান্য মৃদু ড্রাফট গতি
+        f.vx += (Math.random() - 0.5) * 0.08;
+        f.vy += (Math.random() - 0.5) * 0.08;
 
         const dx = f.x - cx;
         const dy = f.y - cy;
@@ -487,21 +426,24 @@
           let diff = Math.abs(curAngle - gapAngle);
           if (diff > Math.PI) diff = Math.PI * 2 - diff;
 
+          // গ্যাপ চেক
           if (diff < gapSize / 2) {
-            if (dist >= arenaRadius) {
+            // 🔴 ক্লোজ-সেভ সাসপেন্স: শুধু একদম পুরো বডি বাইরে গেলেই বাদ হবে
+            if (dist >= arenaRadius + 6) {
               f.eliminated = true;
               f.falling = true;
-              f.vx = nx * 4 + (Math.random() - 0.5) * 2;
-              f.vy = ny * 4 - 2; 
+              f.vx = nx * 3.5 + (Math.random() - 0.5) * 1.5;
+              f.vy = ny * 3.5 - 1.5;
 
               handleElimination(f);
               return;
             }
           } else {
+            // দেয়ালে ধাক্কা খেয়ে বাউন্স
             const dot = f.vx * nx + f.vy * ny;
             if (dot > 0) {
-              f.vx = (f.vx - 2 * dot * nx) * 0.95;
-              f.vy = (f.vy - 2 * dot * ny) * 0.95;
+              f.vx = (f.vx - 2 * dot * nx) * 0.94;
+              f.vy = (f.vy - 2 * dot * ny) * 0.94;
             }
             f.x = cx + nx * (arenaRadius - f.radius - 1);
             f.y = cy + ny * (arenaRadius - f.radius - 1);
@@ -509,6 +451,7 @@
         }
       });
 
+      // ফ্ল্যাগগুলোর একে অপরের সাথে মার্বেল বাউন্স সংঘর্ষ
       const activeFlags = flags.filter(f => !f.eliminated);
       for (let i = 0; i < activeFlags.length; i++) {
         for (let j = i + 1; j < activeFlags.length; j++) {
@@ -531,22 +474,23 @@
 
             const tempVx = f1.vx;
             const tempVy = f1.vy;
-            f1.vx = f2.vx * 1.02;
-            f1.vy = f2.vy * 1.02;
-            f2.vx = tempVx * 1.02;
-            f2.vy = tempVy * 1.02;
+            f1.vx = f2.vx * 1.01;
+            f1.vy = f2.vy * 1.01;
+            f2.vx = tempVx * 1.01;
+            f2.vy = tempVy * 1.01;
           }
         }
       }
 
+      // শেষ একজন বিজয়ী
       if (activeFlags.length === 1 && !isGameOver) {
         isGameOver = true;
         const winner = activeFlags[0];
-        addChatMessage("WINNER", `🏆 ${winner.name} WINS THE MATCH!`);
+        addChatMessage("WINNER", `🏆 ${winner.name} SURVIVED! CHAMPION!`);
         setTimeout(() => {
           round++;
           initGame();
-        }, 4000);
+        }, 4500);
       }
     }
 
@@ -567,7 +511,7 @@
       `;
       elimList.appendChild(badge);
 
-      const elimContainer = document.querySelector('.elim-container');
+      const elimContainer = document.querySelector('.elim-section');
       elimContainer.scrollLeft = elimContainer.scrollWidth;
     }
 
@@ -576,29 +520,72 @@
       document.getElementById('inPlayCount').innerText = active.length;
     }
 
+    // ড্রয়িং - প্রিমিয়াম নিওন ও অ্যারেনা লুক
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
 
+      // ১. অ্যারেনা ব্যাকগ্রাউন্ড (গভীর নিওন শেড)
+      const bgGrad = ctx.createRadialGradient(cx, cy, 20, cx, cy, arenaRadius);
+      bgGrad.addColorStop(0, '#0a142c');
+      bgGrad.addColorStop(0.7, '#070c1b');
+      bgGrad.addColorStop(1, '#02050e');
       ctx.beginPath();
       ctx.arc(cx, cy, arenaRadius, 0, Math.PI * 2);
-      ctx.fillStyle = '#080d19';
+      ctx.fillStyle = bgGrad;
       ctx.fill();
 
+      // অ্যারেনার ভেতর হালকা জোন লাইন
       ctx.beginPath();
-      ctx.arc(cx, cy, arenaRadius, gapAngle + gapSize / 2, gapAngle - gapSize / 2 + Math.PI * 2);
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 6.5;
-      ctx.lineCap = 'round';
+      ctx.arc(cx, cy, arenaRadius * 0.5, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
 
+      // ২. উজ্জ্বল নিওন সাইয়ান রিং (Glowing Neon Ring)
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, arenaRadius, gapAngle + gapSize / 2, gapAngle - gapSize / 2 + Math.PI * 2);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 18;
+      ctx.stroke();
+
+      // রিংয়ের মাঝের সাদা কোর লাইট
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      ctx.restore();
+
+      // গ্যাপের দুই মাথায় স্পার্ক ডট (যাতে গ্যাপটা সহজে চোখে পড়ে)
+      const p1Angle = gapAngle + gapSize / 2;
+      const p2Angle = gapAngle - gapSize / 2;
+      [p1Angle, p2Angle].forEach(ang => {
+        const px = cx + Math.cos(ang) * arenaRadius;
+        const py = cy + Math.sin(ang) * arenaRadius;
+        ctx.beginPath();
+        ctx.arc(px, py, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#f43f5e';
+        ctx.shadowColor = '#f43f5e';
+        ctx.shadowBlur = 10;
+        ctx.fill();
+      });
+
+      // ৩. ফ্ল্যাগ রেন্ডারিং (ড্রপ শ্যাডো ও ক্রোম রিম সহ)
       flags.forEach(f => {
         if (f.y > canvas.height + 60) return;
 
         ctx.save();
+        
+        // ফ্ল্যাগের নিচে ড্রপ শ্যাডো
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetY = 3;
         ctx.clip();
 
         const img = flagImages[f.code];
@@ -610,27 +597,35 @@
         }
         ctx.restore();
 
+        // ফ্ল্যাগের বর্ডার
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 1.8;
         ctx.stroke();
       });
 
+      // ৪. বিজয়ী ব্যানার
       if (isGameOver) {
         const winner = flags.find(f => !f.eliminated);
         if (winner) {
-          ctx.fillStyle = 'rgba(5, 8, 16, 0.82)';
+          ctx.fillStyle = 'rgba(2, 5, 14, 0.88)';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
           ctx.fillStyle = '#facc15';
-          ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, Segoe UI';
+          ctx.font = 'bold 36px -apple-system, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText(`🏆 ${winner.name} WINS!`, cx, cy - 10);
+          ctx.shadowColor = '#facc15';
+          ctx.shadowBlur = 20;
+          ctx.fillText(`🏆 ${winner.name}`, cx, cy - 15);
 
-          ctx.fillStyle = '#ffffff';
-          ctx.font = '16px -apple-system, BlinkMacSystemFont, Segoe UI';
-          ctx.fillText(`Starting Round ${round + 1}...`, cx, cy + 28);
+          ctx.fillStyle = '#38bdf8';
+          ctx.font = '800 20px -apple-system, sans-serif';
+          ctx.fillText(`C H A M P I O N !`, cx, cy + 20);
+
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '14px -apple-system, sans-serif';
+          ctx.fillText(`Next round starting soon...`, cx, cy + 50);
         }
       }
     }
@@ -641,9 +636,7 @@
       requestAnimationFrame(loop);
     }
 
-    addChatMessage("System", "Welcome to Flag Royale!");
-    addChatMessage("Bot", "Live simulation connected.");
-
+    addChatMessage("System", "Welcome to Flag Royale High Stakes!");
     initGame();
     loop();
   </script>
