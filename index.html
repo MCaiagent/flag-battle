@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flag Royale 50 Pro</title>
+  <title>Flag Royale Shorts</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,128 +12,131 @@
       user-select: none;
     }
 
-    /* Full Height Mobile Layout (No Empty Space) */
+    /* তোমার ড্রয়িংয়ের নেভি ব্লু ব্যাকগ্রাউন্ড */
     html, body {
       width: 100%;
       height: 100%;
-      background-color: #030611;
-      color: #fff;
+      background-color: #070d24;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow: hidden;
     }
 
-    .main-wrapper {
+    /* 9:16 Shorts Mobile Layout */
+    .app-container {
       width: 100vw;
       height: 100vh;
-      max-width: 500px;
+      max-width: 440px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      background: radial-gradient(circle at 50% 30%, #0d1733 0%, #040814 100%);
+      justify-content: space-between;
+      padding: 10px 12px;
+      gap: 8px;
       position: relative;
-      overflow: hidden;
-      border-left: 1px solid #1a253d;
-      border-right: 1px solid #1a253d;
+      background-color: #070d24;
     }
 
-    /* ১. OTHERS TOOLS HEADER */
-    .tools-header {
+    /* ======================================================== */
+    /* ১. OTHERS TOOLS (সাদা কার্ড হেডার)                       */
+    /* ======================================================== */
+    .tools-card {
       height: 48px;
-      min-height: 48px;
-      background: rgba(13, 20, 36, 0.95);
+      background: #ffffff;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 12px;
-      border-bottom: 2px solid #1a2744;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       flex-shrink: 0;
-      z-index: 10;
     }
-    .tools-left, .tools-right {
+    .tools-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #991b1b;
+      letter-spacing: 0.5px;
+    }
+    .tools-stats {
       display: flex;
-      align-items: center;
       gap: 6px;
+      align-items: center;
     }
     .badge {
-      background: #151d30;
-      padding: 4px 8px;
-      border-radius: 6px;
+      background: #0f172a;
+      color: #fff;
+      padding: 3px 6px;
+      border-radius: 4px;
       font-size: 11px;
-      font-weight: bold;
-      border: 1px solid #24355a;
+      font-weight: 800;
     }
-    .badge-val {
+    .badge span {
       color: #38bdf8;
-      font-weight: 900;
-      margin-left: 3px;
     }
-    .logo {
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: #facc15;
-      text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
-    }
-    .live-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: #22c55e;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #22c55e;
+    .yt-btn {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      padding: 4px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    /* ২. FLAGS ARENA (মাঝের পুরো জায়গা কাভার করবে) */
-    .arena-box {
+    /* ======================================================== */
+    /* ২. FLAGS (মাঝখানের বড় রিং এরিনা)                         */
+    /* ======================================================== */
+    .flags-card {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      overflow: hidden;
       width: 100%;
+      min-height: 0;
     }
     canvas {
       display: block;
-      width: 96% !important;
-      height: auto !important;
-      max-height: 98% !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 400px;
+      max-height: 400px;
       aspect-ratio: 1 / 1;
     }
 
-    /* ৩. ELIMINATED LIST */
-    .elim-box {
-      height: 48px;
-      min-height: 48px;
-      background: #090e1b;
-      border: 1px solid rgba(239, 68, 68, 0.4);
+    /* ======================================================== */
+    /* ৩. ELIMINATED FLAG'S (সাদা কার্ড)                       */
+    /* ======================================================== */
+    .elim-card {
+      height: 52px;
+      background: #ffffff;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       padding: 0 10px;
       gap: 8px;
-      overflow-x: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       flex-shrink: 0;
-      margin: 0 8px;
-      border-radius: 8px;
+      overflow-x: auto;
     }
-    .elim-box::-webkit-scrollbar { display: none; }
+    .elim-card::-webkit-scrollbar { display: none; }
     .elim-title {
-      color: #ef4444;
-      font-size: 11px;
+      color: #991b1b;
+      font-size: 13px;
       font-weight: 900;
       white-space: nowrap;
+      letter-spacing: 0.5px;
     }
     .elim-list {
       display: flex;
       gap: 6px;
       align-items: center;
     }
-    .elim-badge {
+    .elim-item {
       display: flex;
       align-items: center;
-      background: #141c2e;
-      border: 1px solid #23314d;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
       border-radius: 4px;
       padding: 2px 5px;
       gap: 4px;
@@ -142,104 +145,103 @@
     .elim-rank {
       font-size: 10px;
       font-weight: bold;
-      color: #94a3b8;
+      color: #475569;
     }
     .elim-flag {
-      width: 20px;
-      height: 14px;
+      width: 18px;
+      height: 13px;
       border-radius: 2px;
       object-fit: cover;
     }
 
-    /* ৪. LIVE CHAT (ঠিক ২ লাইন নিচে) */
-    .chat-box {
+    /* ======================================================== */
+    /* ৪. LIVE CHAT (সবার নিচের সাদা কার্ড - ২ লাইন)             */
+    /* ======================================================== */
+    .chat-card {
       height: 68px;
-      min-height: 68px;
-      max-height: 68px;
-      background: #080d1a;
-      border: 1px solid #1c2742;
-      border-radius: 8px;
-      margin: 6px 8px 8px 8px;
+      background: #ffffff;
+      border-radius: 6px;
       display: flex;
       flex-direction: column;
-      padding: 5px 8px;
-      overflow: hidden;
+      padding: 6px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       flex-shrink: 0;
+      overflow: hidden;
     }
-    .chat-header {
-      font-size: 10px;
-      font-weight: 800;
-      color: #94a3b8;
+    .chat-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #dc2626;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .chat-messages {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      gap: 4px;
+      gap: 3px;
       overflow: hidden;
     }
     .chat-msg {
-      background: #111828;
-      padding: 3px 6px;
-      border-radius: 4px;
-      font-size: 11px;
-      line-height: 1.2;
+      background: #f8fafc;
       border-left: 3px solid #38bdf8;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      color: #0f172a;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      line-height: 1.2;
     }
     .chat-msg.elim-msg {
       border-left-color: #ef4444;
-      background: rgba(36, 17, 24, 0.8);
+      background: #fef2f2;
+      color: #991b1b;
     }
     .chat-user {
-      color: #38bdf8;
-      font-weight: bold;
+      font-weight: 800;
+      color: #0284c7;
     }
 
     @keyframes popIn {
-      0% { transform: scale(0.4); opacity: 0; }
+      0% { transform: scale(0.3); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <div class="main-wrapper">
-    
-    <!-- ১. Tools Header -->
-    <div class="tools-header">
-      <div class="tools-left">
-        <div class="badge">R <span class="badge-val" id="roundNum">1</span></div>
-        <div class="badge">ALIVE <span class="badge-val" id="inPlayCount">50</span></div>
-      </div>
-      <div class="logo">FLAG ROYALE</div>
-      <div class="tools-right">
-        <div class="badge"><span class="live-dot"></span> <span style="color:#22c55e; margin-left:3px;">LIVE</span></div>
+  <div class="app-container">
+
+    <!-- ১. Others Tools Header (White Card) -->
+    <div class="tools-card">
+      <div class="tools-title">Others tools</div>
+      <div class="tools-stats">
+        <div class="badge">R <span id="roundNum">1</span></div>
+        <div class="badge">ALIVE <span id="inPlayCount">50</span></div>
+        <button class="yt-btn" id="ytBtn" onclick="connectYouTube()">YT Live</button>
       </div>
     </div>
 
-    <!-- ২. Flags Arena -->
-    <div class="arena-box">
+    <!-- ২. FLAGS Arena -->
+    <div class="flags-card">
       <canvas id="gameCanvas" width="700" height="700"></canvas>
     </div>
 
-    <!-- ৩. Eliminated List -->
-    <div class="elim-box">
-      <div class="elim-title">OUT:</div>
+    <!-- ৩. ELIMINATED FLAG'S (White Card) -->
+    <div class="elim-card">
+      <div class="elim-title">ELIMINATED FLAG'S:</div>
       <div class="elim-list" id="eliminatedList"></div>
     </div>
 
-    <!-- ৪. Live Chat -->
-    <div class="chat-box">
-      <div class="chat-header">
-        <span>LIVE CHAT</span>
-        <span style="color: #22c55e;">● ACTIVE</span>
+    <!-- ৪. Live Chat (White Card - 2 Lines) -->
+    <div class="chat-card">
+      <div class="chat-title">
+        <span id="chatTitle">Live chat</span>
+        <span style="color:#16a34a; font-size:10px;">● CONNECTED</span>
       </div>
       <div class="chat-messages" id="chatBox"></div>
     </div>
@@ -254,7 +256,7 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    // 🔴 ঠিক ৫০টি দেশ
+    // ৫০টি দেশ
     const countryList = [
       { code: 'bd', name: 'Bangladesh' },
       { code: 'ar', name: 'Argentina' },
@@ -318,9 +320,9 @@
     let round = 1;
     const initialRadius = 330;
     let arenaRadius = initialRadius;
-    const minRadius = 85;
+    const minRadius = 90;
     let gapAngle = 0;
-    const gapSize = 0.42; // ছোট গ্যাপ, সাসপেন্স বেশি
+    const gapSize = 0.38; // আরও ছোট গ্যাপ, যেন চট করে কেউ না পড়ে
     let flags = [];
     let eliminatedFlags = [];
     let isGameOver = false;
@@ -337,6 +339,33 @@
       }
     }
 
+    // দেশের নাম কমেন্ট করলে বাউন্স
+    function boostCountry(name) {
+      const target = flags.find(f => !f.eliminated && (f.name.toLowerCase().includes(name.toLowerCase()) || f.code.toLowerCase() === name.toLowerCase()));
+      if (target) {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        target.vx += (cx - target.x) * 0.035;
+        target.vy += (cy - target.y) * 0.035;
+      }
+    }
+
+    // YouTube Live কানেকশন হ্যান্ডলার
+    let ytLiveId = null;
+    function connectYouTube() {
+      const val = prompt("তোমার YouTube Live Video ID বা লিংকটি দাও:\n(যেমন: https://www.youtube.com/watch?v=XXXXXX)");
+      if (!val) return;
+      let vid = val;
+      if (val.includes("v=")) vid = val.split("v=")[1].substring(0, 11);
+      else if (val.includes("live/")) vid = val.split("live/")[1].substring(0, 11);
+
+      ytLiveId = vid;
+      document.getElementById('ytBtn').style.background = "#16a34a";
+      document.getElementById('ytBtn').innerText = "✓ Linked";
+      document.getElementById('chatTitle').innerText = "YT: " + ytLiveId;
+      addChatMessage("System", "YouTube stream linked! Live mode ready.");
+    }
+
     function initGame() {
       arenaRadius = initialRadius;
       gapAngle = 0;
@@ -345,7 +374,7 @@
       document.getElementById('roundNum').innerText = round;
       document.getElementById('eliminatedList').innerHTML = '';
 
-      // ৫০টি ফ্ল্যাগ তৈরি
+      // ৫০টি পতাকা - গতি অত্যন্ত ধীর (২.২) করা হয়েছে যাতে শান্তভাবে গড়ায়
       flags = countryList.map(c => {
         const angle = Math.random() * Math.PI * 2;
         const dist = Math.random() * (arenaRadius - 80);
@@ -354,8 +383,8 @@
           name: c.name,
           x: canvas.width / 2 + Math.cos(angle) * dist,
           y: canvas.height / 2 + Math.sin(angle) * dist,
-          vx: (Math.random() - 0.5) * 3.6,
-          vy: (Math.random() - 0.5) * 3.6,
+          vx: (Math.random() - 0.5) * 2.4, // গতি নিয়ন্ত্রণ
+          vy: (Math.random() - 0.5) * 2.4,
           radius: 14.5,
           eliminated: false,
           falling: false
@@ -363,9 +392,10 @@
       });
 
       updateUI();
-      addChatMessage("System", `Round ${round} Started! (50 Nations) 🔥`);
+      addChatMessage("System", `Round ${round} with 50 countries started!`);
     }
 
+    // কমেন্ট সিমুলেশন (YT কানেক্ট না থাকলে স্বয়ংক্রিয়)
     const fakeUsers = ["Alex_99", "Tanvir_BD", "Messi10", "CR7_Boss", "NinjaX", "Rahim", "Sabbir", "David"];
     setInterval(() => {
       if (!isGameOver) {
@@ -374,21 +404,23 @@
           const u = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
           const rCountry = active[Math.floor(Math.random() * active.length)];
           addChatMessage(u, `Go ${rCountry.name}! 🚀`);
+          boostCountry(rCountry.name);
         }
       }
     }, 2800);
 
+    // ফিজিক্স আপডেট (খুব ধীরে চলবে, সাসপেন্স ধরে রাখবে)
     function updatePhysics() {
       if (isGameOver) return;
 
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
 
-      // ধীরে রিং ছোট হবে (সাসপেন্স)
+      // রিং সংকুচিত হওয়ার গতি অত্যন্ত কম (0.02)
       if (arenaRadius > minRadius) {
-        arenaRadius -= 0.038;
+        arenaRadius -= 0.02;
       }
-      gapAngle += 0.012;
+      gapAngle += 0.009; // দেয়াল আস্তে ঘুরবে
       if (gapAngle > Math.PI * 2) gapAngle -= Math.PI * 2;
 
       flags.forEach(f => {
@@ -402,8 +434,9 @@
         f.x += f.vx;
         f.y += f.vy;
 
-        f.vx += (Math.random() - 0.5) * 0.08;
-        f.vy += (Math.random() - 0.5) * 0.08;
+        // খুব হালকা এলোমেলো বাউন্স
+        f.vx += (Math.random() - 0.5) * 0.05;
+        f.vy += (Math.random() - 0.5) * 0.05;
 
         const dx = f.x - cx;
         const dy = f.y - cy;
@@ -418,19 +451,19 @@
           let diff = Math.abs(curAngle - gapAngle);
           if (diff > Math.PI) diff = Math.PI * 2 - diff;
 
-          // গ্যাপ দিয়ে বের হলে
+          // গ্যাপ চেক - পুরো বল বাইরে ছিটকে গেলেই কেবল আউট
           if (diff < gapSize / 2) {
-            if (dist >= arenaRadius + 6) {
+            if (dist >= arenaRadius + 8) {
               f.eliminated = true;
               f.falling = true;
-              f.vx = nx * 3.5 + (Math.random() - 0.5) * 1.5;
-              f.vy = ny * 3.5 - 1.5;
+              f.vx = nx * 3;
+              f.vy = ny * 3 - 1;
 
               handleElimination(f);
               return;
             }
           } else {
-            // দেয়ালে বাউন্স
+            // দেয়ালে ধাক্কা
             const dot = f.vx * nx + f.vy * ny;
             if (dot > 0) {
               f.vx = (f.vx - 2 * dot * nx) * 0.94;
@@ -442,7 +475,7 @@
         }
       });
 
-      // ফ্ল্যাগ বাউন্স সংঘর্ষ
+      // ফ্ল্যাগ সংঘর্ষ
       const activeFlags = flags.filter(f => !f.eliminated);
       for (let i = 0; i < activeFlags.length; i++) {
         for (let j = i + 1; j < activeFlags.length; j++) {
@@ -465,10 +498,10 @@
 
             const tempVx = f1.vx;
             const tempVy = f1.vy;
-            f1.vx = f2.vx * 1.01;
-            f1.vy = f2.vy * 1.01;
-            f2.vx = tempVx * 1.01;
-            f2.vy = tempVy * 1.01;
+            f1.vx = f2.vx * 0.98;
+            f1.vy = f2.vy * 0.98;
+            f2.vx = tempVx * 0.98;
+            f2.vy = tempVy * 0.98;
           }
         }
       }
@@ -481,7 +514,7 @@
         setTimeout(() => {
           round++;
           initGame();
-        }, 4500);
+        }, 5000);
       }
     }
 
@@ -495,15 +528,15 @@
 
       const elimList = document.getElementById('eliminatedList');
       const badge = document.createElement('div');
-      badge.className = 'elim-badge';
+      badge.className = 'elim-item';
       badge.innerHTML = `
         <span class="elim-rank">#${rank}</span>
         <img src="https://flagcdn.com/w40/${flag.code}.png" class="elim-flag" alt="${flag.name}">
       `;
       elimList.appendChild(badge);
 
-      const elimBox = document.querySelector('.elim-box');
-      elimBox.scrollLeft = elimBox.scrollWidth;
+      const elimCard = document.querySelector('.elim-card');
+      elimCard.scrollLeft = elimCard.scrollWidth;
     }
 
     function updateUI() {
@@ -511,46 +544,35 @@
       document.getElementById('inPlayCount').innerText = active.length;
     }
 
+    // ড্রয়িং
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
 
       // এরিনা ব্যাকগ্রাউন্ড
-      const bgGrad = ctx.createRadialGradient(cx, cy, 20, cx, cy, arenaRadius);
-      bgGrad.addColorStop(0, '#0a142c');
-      bgGrad.addColorStop(0.7, '#070c1b');
-      bgGrad.addColorStop(1, '#02050e');
       ctx.beginPath();
       ctx.arc(cx, cy, arenaRadius, 0, Math.PI * 2);
-      ctx.fillStyle = bgGrad;
+      ctx.fillStyle = '#ffffff'; // সাদা এরিনা
       ctx.fill();
 
-      // উজ্জ্বল নিওন সাইয়ান রিং
+      // সাদা এরিনার বর্ডার (ঘূর্ণায়মান গ্যাপসহ)
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, arenaRadius, gapAngle + gapSize / 2, gapAngle - gapSize / 2 + Math.PI * 2);
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 7;
       ctx.lineCap = 'round';
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 18;
-      ctx.stroke();
-
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2.5;
       ctx.stroke();
       ctx.restore();
 
-      // গ্যাপের দুই মাথায় স্পার্ক ডট
+      // গ্যাপের মাথায় লাল ডট
       [gapAngle + gapSize / 2, gapAngle - gapSize / 2].forEach(ang => {
         const px = cx + Math.cos(ang) * arenaRadius;
         const py = cy + Math.sin(ang) * arenaRadius;
         ctx.beginPath();
-        ctx.arc(px, py, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#f43f5e';
-        ctx.shadowColor = '#f43f5e';
-        ctx.shadowBlur = 10;
+        ctx.arc(px, py, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#dc2626';
         ctx.fill();
       });
 
@@ -561,9 +583,6 @@
         ctx.save();
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-        ctx.shadowBlur = 8;
-        ctx.shadowOffsetY = 3;
         ctx.clip();
 
         const img = flagImages[f.code];
@@ -577,32 +596,26 @@
 
         ctx.beginPath();
         ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.strokeStyle = '#1e293b';
         ctx.lineWidth = 1.8;
         ctx.stroke();
       });
 
-      // বিজয়ী স্ক্রিন
+      // বিজয়ী ব্যানার
       if (isGameOver) {
         const winner = flags.find(f => !f.eliminated);
         if (winner) {
-          ctx.fillStyle = 'rgba(2, 5, 14, 0.88)';
+          ctx.fillStyle = 'rgba(7, 13, 36, 0.88)';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
           ctx.fillStyle = '#facc15';
           ctx.font = 'bold 36px sans-serif';
           ctx.textAlign = 'center';
-          ctx.shadowColor = '#facc15';
-          ctx.shadowBlur = 20;
           ctx.fillText(`🏆 ${winner.name}`, cx, cy - 15);
 
           ctx.fillStyle = '#38bdf8';
           ctx.font = '800 20px sans-serif';
           ctx.fillText(`C H A M P I O N !`, cx, cy + 20);
-
-          ctx.fillStyle = '#94a3b8';
-          ctx.font = '14px sans-serif';
-          ctx.fillText(`Next round starting soon...`, cx, cy + 50);
         }
       }
     }
@@ -613,7 +626,7 @@
       requestAnimationFrame(loop);
     }
 
-    addChatMessage("System", "Welcome to Flag Royale High Stakes!");
+    addChatMessage("System", "Welcome to Flag Royale!");
     initGame();
     loop();
   </script>
